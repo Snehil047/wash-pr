@@ -50,15 +50,15 @@ export default function LoginPage() {
         src="/ward.jpg"
         alt="Map"
         className={styles.map}
-        width={400}
-        height={500}
+        width={300}
+        height={400}
       />
 
       {/* Headings */}
       <h1 className={styles.heading}>
         Web Based Spatial Waste Disposal Management System
       </h1>
-      <h3 className={styles.subheading}>Varanasi, Uttar Pradesh, 221108</h3>
+      <h3 className={styles.subheading}>Varanasi, Uttar Pradesh, 221010</h3>
 
       {/* Login Form */}
       <div className="row justify-content-center align-items-center vh-100">
