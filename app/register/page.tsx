@@ -4,16 +4,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./login.module.css";
+import styles from "../login.module.css";
 
-const VALID_CREDENTIALS = {
-  email: "drawadhesh@gmail.com",
-  password: "drawadhesh@123",
-};
-
-export default function LoginPage() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+export default function RegisterPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const handleChange = (e: any) => {
@@ -23,15 +24,17 @@ export default function LoginPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
-    if (
-      formData.email === VALID_CREDENTIALS.email &&
-      formData.password === VALID_CREDENTIALS.password
-    ) {
-      router.push("/dashboard");
-    } else {
-      setError("Invalid email or password");
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
+
+    setSuccess("Registration successful! Redirecting to login...");
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   return (
@@ -60,14 +63,26 @@ export default function LoginPage() {
       </h1>
       <h3 className={styles.subheading}>Varanasi, Uttar Pradesh, 221108</h3>
 
-      {/* Login Form */}
+      {/* Registration Form */}
       <div className="row justify-content-center align-items-center vh-100">
         <div className="col-md-4">
           <div className={`card shadow p-4 ${styles.loginCard}`}>
             {error && <div className="alert alert-danger">{error}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label className="form-label">Username:</label>
+                <label className="form-label">Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Email:</label>
                 <input
                   type="email"
                   name="email"
@@ -88,21 +103,39 @@ export default function LoginPage() {
                   required
                 />
               </div>
+              <div className="mb-3">
+                <label className="form-label">Confirm Password:</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  className="form-control"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
               <button type="submit" className="btn btn-primary w-100 mb-2">
-                Login
+                Register
               </button>
               <button
                 type="button"
                 className={`btn w-100 ${styles.clearButton}`}
-                onClick={() => setFormData({ email: "", password: "" })}
+                onClick={() =>
+                  setFormData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                  })
+                }
               >
                 Clear
               </button>
             </form>
             <div className="mt-2">
-              Dont have an account?{" "}
-              <a href="/register" className="text-end">
-                Register here
+              Already have an account?{" "}
+              <a href="/" className="text-end">
+                Login here
               </a>{" "}
             </div>
           </div>
