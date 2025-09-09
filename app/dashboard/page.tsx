@@ -143,7 +143,7 @@ export default function HomePage() {
       <section className="hero-section">
         <Container>
           <div className="text-center text-white mb-5">
-            <h1>VARANASI SMART ENVIRONMENTAL SOLUTIONS</h1>
+            <h1>BILASPUR SMART ENVIRONMENTAL SOLUTIONS</h1>
             <p className="lead">PROCESS APPLICATIONS</p>
           </div>
           <div className="application-grid">
